@@ -37,16 +37,16 @@ sed -e "/^#/d" \
 if [ "${Domain}" = "no" ]; then
   echo "Aditya's Personal VPN"
 else
-  plugin=$(echo -n "v2ray;path=${V2_Path};host=${Domain};tls" | sed -e 's/\//%2F/g' -e 's/=/%3D/g' -e 's/;/%3B/g')
-  ss="ss://$(echo -n ${ENCRYPT}:${Password} | base64 -w 0)@${Domain}:443?plugin=${plugin}" 
+  # skip plugin string generation to avoid confusion for now
+  ss="ss://$(echo -n ${ENCRYPT}:${Password} | base64 -w 0)@${Domain}:443"
   echo "${ss}" | tr -d '\n' > /wwwroot/index.html
   echo -n "${ss}" | qrencode -s 6 -o /wwwroot/vpn.png
 fi
 
-echo "Starting ss-server with explicit parameters:"
-echo "ss-server -s 0.0.0.0 -p 2333 -k ${Password} -m ${ENCRYPT} -u --plugin v2 --plugin-opts server;path=${V2_Path} &"
+echo "Starting ss-server without plugin:"
+echo "ss-server -s 0.0.0.0 -p 2333 -k ${Password} -m ${ENCRYPT} -u &"
 
-ss-server -s 0.0.0.0 -p 2333 -k "${Password}" -m ${ENCRYPT} -u --plugin v2 --plugin-opts "server;path=${V2_Path}" &
+ss-server -s 0.0.0.0 -p 2333 -k "${Password}" -m ${ENCRYPT} -u &
 
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'
