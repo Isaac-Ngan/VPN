@@ -1,6 +1,6 @@
 {
     "server":"0.0.0.0",
-    "server_port":"2333",
+    "server_port":"443",
     "password":"${PASSWORD}",
     "timeout":300,
     "method":"${ENCRYPT}",
