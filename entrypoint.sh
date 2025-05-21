@@ -41,7 +41,8 @@ else
 fi
 
 echo "Starting ss-server with command:"  
-echo "ss-server -s 0.0.0.0 -c /etc/shadowsocks-libev/config.json &"  
-ss-server -s 0.0.0.0 -c /etc/shadowsocks-libev/config.json &
+echo "ss-server -c /etc/shadowsocks-libev/config.json &"  
+ss-server -c /etc/shadowsocks-libev/config.json &
+
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'
