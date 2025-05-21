@@ -44,9 +44,9 @@ else
 fi
 
 echo "Starting ss-server without plugin:"
-echo "ss-server -s 0.0.0.0 -p 2333 -k ${Password} -m ${ENCRYPT} -u &"
+echo "ss-server -s 0.0.0.0 -p 443 -k ${Password} -m ${ENCRYPT} -u &"
 
-ss-server -s 0.0.0.0 -p 2333 -k "${Password}" -m ${ENCRYPT} -u &
+ss-server -s 0.0.0.0 -p 443 -k "${Password}" -m ${ENCRYPT} -u &
 
 rm -rf /etc/nginx/sites-enabled/default
 nginx -g 'daemon off;'
